@@ -1,6 +1,5 @@
 extends Squirrel
 
-signal player_death
 signal on_hit(lives_left)
 signal win
 
@@ -23,7 +22,7 @@ func set_size(size):
 		.set_size(size)
 
 func _ready():
-	Globals.current_camera = $Camera2D
+	pass
 
 func _process(delta):
 	var vel = Vector2.ZERO
@@ -62,7 +61,6 @@ func kill():
 	
 	if lives <= 0:
 		.kill()
-		emit_signal("player_death")
 
 func _on_Player_area_entered(area):
 	if lives > 0:

@@ -1,7 +1,7 @@
 extends Node
 
-const NUM_GRASS := 50
-const NUM_ENEMY := 20
+const NUM_GRASS := 75
+const NUM_ENEMY := 25
 const WIN_SIZE := 300
 
 var grass_inst = preload("res://Grass.tscn")
@@ -29,13 +29,11 @@ func spawn_grass():
 		grass.add_child(e)
 
 func spawn_one_grass(pos: Vector2):
-	print("new grass")
 	var e: Grass = grass_inst.instance()
 	e.position = pos
 	grass.call_deferred("add_child", e)
 
 func spawn_one_enemy(pos: Vector2):
-	print("new enemy")
 	var e: Enemy = enemy_inst.instance()
 	var size = rand_range(player.size / 2, player.size * 2)
 	e.set_size(size)
@@ -85,7 +83,7 @@ func _on_grass_visibility(visible):
 			+ player.position
 		)
 
-func _on_enemy_visibility(visible, enemy):
+func _on_enemy_visibility(visible, _enemy):
 	if not visible and Globals.visible_enemy < NUM_ENEMY:
 		var dir: Vector2
 		if player.last_velocity.length() <= .1:
@@ -95,19 +93,16 @@ func _on_enemy_visibility(visible, enemy):
 		
 		spawn_one_enemy(point_on_bounds(current_screen() / 2, dir) + player.position)
 
-func _on_Player_player_death():
-	$"UI/LoseLabel".visible = true
-
 func _on_Player_death(killer):
-	_on_Player_player_death()
+	$"UI/LoseLabel".visible = true
 
 func _on_Player_win():
 	$"UI/WinLabel".visible = true
 
 func _on_Player_hunger_sated(new_size):
 	# chomp?
-	pass
+	Globals.current_camera.shake(.1, new_size / 16.0)
 
 func _on_Player_on_hit(lives_left):
 	# shake screen? play sound?
-	pass # Replace with function body.
+	Globals.current_camera.shake(.2, 5)

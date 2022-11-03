@@ -95,5 +95,4 @@ uppercase = true
 [connection signal="hunger_sated" from="Player" to="." method="_on_Player_hunger_sated"]
 [connection signal="on_hit" from="Player" to="." method="_on_Player_on_hit"]
 [connection signal="on_hit" from="Player" to="UI/LivesBar" method="_on_Player_on_hit"]
-[connection signal="player_death" from="Player" to="." method="_on_Player_player_death"]
 [connection signal="win" from="Player" to="." method="_on_Player_win"]

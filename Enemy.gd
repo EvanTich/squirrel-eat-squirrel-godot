@@ -8,10 +8,6 @@ const MIN_SPEED := 20
 
 export var velocity := Vector2.ZERO
 
-func reset(pos: Vector2):
-	.reset(pos)
-	new_velocity()
-	
 func set_size(size):
 	if size > MAX_SIZE:
 		.set_size(MAX_SIZE)

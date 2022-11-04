@@ -63,7 +63,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	
-	for _i in range(randf() * (NUM_ENEMY - enemies.get_child_count())):
+	for _i in range(rand_range(0, NUM_ENEMY - enemies.get_child_count())):
 		var dir: Vector2
 		if player.last_velocity.length() <= .1:
 			dir = dir(rand_range(0, 2 * PI))
